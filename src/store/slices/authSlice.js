@@ -1,21 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  contact?: string;
-  dob?: string;
-}
-
-interface AuthState {
-  isAuthenticated: boolean;
-  user: User | null;
-  token: string | null;
-  loading: boolean;
-}
-
-const initialState: AuthState = {
+const initialState = {
   isAuthenticated: false,
   user: null,
   token: null,
@@ -26,12 +11,12 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loginSuccess: (state, action: PayloadAction<User>) => {
+    loginSuccess: (state, action) => {
       state.isAuthenticated = true;
       state.user = action.payload;
       state.loading = false;
     },
-    setCredentials: (state, action: PayloadAction<{ user: User; token: string }>) => {
+    setCredentials: (state, action) => {
       state.isAuthenticated = true;
       state.user = action.payload.user;
       state.token = action.payload.token;
@@ -42,12 +27,12 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
     },
-    updateProfile: (state, action: PayloadAction<Partial<User>>) => {
+    updateProfile: (state, action) => {
       if (state.user) {
         state.user = { ...state.user, ...action.payload };
       }
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoading: (state, action) => {
       state.loading = action.payload;
     },
   },
