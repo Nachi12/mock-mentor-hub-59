@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Layout from "@/components/layout/Layout";
@@ -6,8 +6,6 @@ import { FaRocket, FaUserGraduate, FaBriefcase, FaChartLine, FaQuoteLeft } from 
 import { motion } from "framer-motion";
 
 const Index = () => {
-  const navigate = useNavigate();
-
   const features = [
     {
       icon: FaUserGraduate,
@@ -63,22 +61,24 @@ const Index = () => {
                 Practice with industry experts and land your dream job
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  size="lg"
-                  className="bg-white text-primary hover:bg-white/90"
-                  onClick={() => navigate("/signup")}
-                >
-                  <FaRocket className="mr-2 h-5 w-5" />
-                  Get Started Free
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white/10"
-                  onClick={() => navigate("/about")}
-                >
-                  Learn More
-                </Button>
+                <Link to="/signup">
+                  <Button
+                    size="lg"
+                    className="bg-white text-primary hover:bg-white/90"
+                  >
+                    <FaRocket className="mr-2 h-5 w-5" />
+                    Get Started Free
+                  </Button>
+                </Link>
+                <Link to="/about">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-white text-white hover:bg-white/10"
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           </div>
@@ -181,14 +181,15 @@ const Index = () => {
               <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
                 Join MeetConnect today and take the first step towards your dream career
               </p>
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90"
-                onClick={() => navigate("/signup")}
-              >
-                <FaRocket className="mr-2 h-5 w-5" />
-                Start Free Trial
-              </Button>
+              <Link to="/signup">
+                <Button
+                  size="lg"
+                  className="bg-white text-primary hover:bg-white/90"
+                >
+                  <FaRocket className="mr-2 h-5 w-5" />
+                  Start Free Trial
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </section>
