@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
 import { setInterviews, setFilter } from "@/store/slices/interviewSlice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,41 +10,41 @@ import { motion } from "framer-motion";
 
 const MyInterviews = () => {
   const dispatch = useDispatch();
-  const { interviews, filter } = useSelector((state: RootState) => state.interviews);
-  const [sortBy, setSortBy] = useState<string>("date");
+  const { interviews, filter } = useSelector((state) => state.interviews);
+  const [sortBy, setSortBy] = useState("date");
 
   // Mock data - in production, this would come from an API
   useEffect(() => {
     const mockInterviews = [
       {
         id: "1",
-        type: "frontend" as const,
+        type: "frontend",
         date: "2024-12-20",
         time: "10:00",
         interviewer: "Sarah Johnson - Senior Frontend Engineer",
-        status: "completed" as const,
+        status: "completed",
         feedback: "Great understanding of React concepts. Need to work on optimization techniques.",
         score: 85,
-        result: "passed" as const,
+        result: "passed",
       },
       {
         id: "2",
-        type: "behavioral" as const,
+        type: "behavioral",
         date: "2024-12-22",
         time: "14:00",
         interviewer: "Jessica Williams - Engineering Manager",
-        status: "completed" as const,
+        status: "completed",
         feedback: "Excellent communication skills. Good examples of leadership.",
         score: 90,
-        result: "passed" as const,
+        result: "passed",
       },
       {
         id: "3",
-        type: "fullstack" as const,
+        type: "fullstack",
         date: "2024-12-25",
         time: "11:00",
         interviewer: "Mike Chen - Full Stack Lead",
-        status: "upcoming" as const,
+        status: "upcoming",
         resources: [
           "https://example.com/fullstack-guide",
           "https://example.com/system-design",
@@ -53,11 +52,11 @@ const MyInterviews = () => {
       },
       {
         id: "4",
-        type: "dsa" as const,
+        type: "dsa",
         date: "2024-12-28",
         time: "15:00",
         interviewer: "David Park - Tech Lead",
-        status: "upcoming" as const,
+        status: "upcoming",
         resources: [
           "https://example.com/dsa-patterns",
           "https://example.com/algorithm-prep",
@@ -83,7 +82,7 @@ const MyInterviews = () => {
     return 0;
   });
 
-  const getTypeColor = (type: string) => {
+  const getTypeColor = (type) => {
     const colors = {
       behavioral: "bg-purple-500",
       fullstack: "bg-blue-500",
@@ -91,17 +90,17 @@ const MyInterviews = () => {
       backend: "bg-orange-500",
       dsa: "bg-red-500",
     };
-    return colors[type as keyof typeof colors] || "bg-gray-500";
+    return colors[type] || "bg-gray-500";
   };
 
-  const getResultBadge = (result?: string) => {
+  const getResultBadge = (result) => {
     if (!result) return null;
     const variants = {
       passed: { className: "bg-success text-success-foreground", label: "Passed" },
       failed: { className: "bg-destructive text-destructive-foreground", label: "Failed" },
       pending: { className: "bg-warning text-warning-foreground", label: "Pending" },
     };
-    const variant = variants[result as keyof typeof variants];
+    const variant = variants[result];
     return <Badge className={variant.className}>{variant.label}</Badge>;
   };
 
@@ -125,7 +124,7 @@ const MyInterviews = () => {
         {/* Filters */}
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <Select value={filter} onValueChange={(value: any) => dispatch(setFilter(value))}>
+            <Select value={filter} onValueChange={(value) => dispatch(setFilter(value))}>
               <SelectTrigger className="w-full md:w-48">
                 <SelectValue placeholder="Filter interviews" />
               </SelectTrigger>

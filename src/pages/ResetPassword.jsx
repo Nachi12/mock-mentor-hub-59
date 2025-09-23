@@ -15,7 +15,7 @@ const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {

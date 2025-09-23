@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
 import { setQuestions, setBlogs, setCategory, setPage } from "@/store/slices/resourceSlice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,9 +20,9 @@ import { motion } from "framer-motion";
 const Resources = () => {
   const dispatch = useDispatch();
   const { questions, blogs, selectedCategory, currentPage } = useSelector(
-    (state: RootState) => state.resources
+    (state) => state.resources
   );
-  const [expandedQuestions, setExpandedQuestions] = useState<Set<string>>(new Set());
+  const [expandedQuestions, setExpandedQuestions] = useState(new Set());
 
   const questionsPerPage = 10;
 
@@ -31,32 +30,32 @@ const Resources = () => {
   useEffect(() => {
     const mockQuestions = {
       frontend: [
-        { id: "1", question: "What is the Virtual DOM in React?", category: "frontend" as const, difficulty: "medium" as const, answer: "The Virtual DOM is a JavaScript representation of the actual DOM..." },
-        { id: "2", question: "Explain React Hooks", category: "frontend" as const, difficulty: "medium" as const, answer: "Hooks are functions that let you use state and other React features..." },
-        { id: "3", question: "What is CSS Box Model?", category: "frontend" as const, difficulty: "easy" as const, answer: "The CSS box model is a container that contains multiple properties..." },
-        { id: "4", question: "Difference between var, let, and const?", category: "frontend" as const, difficulty: "easy" as const, answer: "var has function scope, let and const have block scope..." },
-        { id: "5", question: "What is closure in JavaScript?", category: "frontend" as const, difficulty: "hard" as const, answer: "A closure is the combination of a function and the lexical environment..." },
-        { id: "6", question: "Explain event delegation", category: "frontend" as const, difficulty: "medium" as const, answer: "Event delegation is a technique of delegating events to a parent element..." },
-        { id: "7", question: "What is Redux?", category: "frontend" as const, difficulty: "medium" as const, answer: "Redux is a predictable state container for JavaScript apps..." },
-        { id: "8", question: "Explain CSS Flexbox", category: "frontend" as const, difficulty: "easy" as const, answer: "Flexbox is a layout model that allows elements to align and distribute space..." },
-        { id: "9", question: "What are Web Components?", category: "frontend" as const, difficulty: "hard" as const, answer: "Web Components are a set of web platform APIs that allow you to create custom elements..." },
-        { id: "10", question: "Difference between == and ===?", category: "frontend" as const, difficulty: "easy" as const, answer: "== performs type coercion, === checks both value and type..." },
-        { id: "11", question: "What is webpack?", category: "frontend" as const, difficulty: "medium" as const, answer: "Webpack is a module bundler for JavaScript applications..." },
-        { id: "12", question: "Explain async/await", category: "frontend" as const, difficulty: "medium" as const, answer: "Async/await is syntactic sugar for promises, making asynchronous code look synchronous..." },
+        { id: "1", question: "What is the Virtual DOM in React?", category: "frontend", difficulty: "medium", answer: "The Virtual DOM is a JavaScript representation of the actual DOM..." },
+        { id: "2", question: "Explain React Hooks", category: "frontend", difficulty: "medium", answer: "Hooks are functions that let you use state and other React features..." },
+        { id: "3", question: "What is CSS Box Model?", category: "frontend", difficulty: "easy", answer: "The CSS box model is a container that contains multiple properties..." },
+        { id: "4", question: "Difference between var, let, and const?", category: "frontend", difficulty: "easy", answer: "var has function scope, let and const have block scope..." },
+        { id: "5", question: "What is closure in JavaScript?", category: "frontend", difficulty: "hard", answer: "A closure is the combination of a function and the lexical environment..." },
+        { id: "6", question: "Explain event delegation", category: "frontend", difficulty: "medium", answer: "Event delegation is a technique of delegating events to a parent element..." },
+        { id: "7", question: "What is Redux?", category: "frontend", difficulty: "medium", answer: "Redux is a predictable state container for JavaScript apps..." },
+        { id: "8", question: "Explain CSS Flexbox", category: "frontend", difficulty: "easy", answer: "Flexbox is a layout model that allows elements to align and distribute space..." },
+        { id: "9", question: "What are Web Components?", category: "frontend", difficulty: "hard", answer: "Web Components are a set of web platform APIs that allow you to create custom elements..." },
+        { id: "10", question: "Difference between == and ===?", category: "frontend", difficulty: "easy", answer: "== performs type coercion, === checks both value and type..." },
+        { id: "11", question: "What is webpack?", category: "frontend", difficulty: "medium", answer: "Webpack is a module bundler for JavaScript applications..." },
+        { id: "12", question: "Explain async/await", category: "frontend", difficulty: "medium", answer: "Async/await is syntactic sugar for promises, making asynchronous code look synchronous..." },
       ],
       backend: [
-        { id: "13", question: "What is REST API?", category: "backend" as const, difficulty: "easy" as const, answer: "REST is an architectural style for designing networked applications..." },
-        { id: "14", question: "Explain database indexing", category: "backend" as const, difficulty: "medium" as const, answer: "Database indexing is a data structure technique to quickly locate data..." },
-        { id: "15", question: "What is middleware?", category: "backend" as const, difficulty: "medium" as const, answer: "Middleware is software that acts as a bridge between an operating system..." },
+        { id: "13", question: "What is REST API?", category: "backend", difficulty: "easy", answer: "REST is an architectural style for designing networked applications..." },
+        { id: "14", question: "Explain database indexing", category: "backend", difficulty: "medium", answer: "Database indexing is a data structure technique to quickly locate data..." },
+        { id: "15", question: "What is middleware?", category: "backend", difficulty: "medium", answer: "Middleware is software that acts as a bridge between an operating system..." },
       ],
       fullstack: [
-        { id: "16", question: "Explain microservices architecture", category: "fullstack" as const, difficulty: "hard" as const, answer: "Microservices is an architectural style that structures an application..." },
-        { id: "17", question: "What is CI/CD?", category: "fullstack" as const, difficulty: "medium" as const, answer: "CI/CD stands for Continuous Integration and Continuous Deployment..." },
+        { id: "16", question: "Explain microservices architecture", category: "fullstack", difficulty: "hard", answer: "Microservices is an architectural style that structures an application..." },
+        { id: "17", question: "What is CI/CD?", category: "fullstack", difficulty: "medium", answer: "CI/CD stands for Continuous Integration and Continuous Deployment..." },
       ],
       behavioral: [
-        { id: "18", question: "Tell me about yourself", category: "behavioral" as const, difficulty: "easy" as const, answer: "Start with your current role, highlight key achievements..." },
-        { id: "19", question: "Why do you want to work here?", category: "behavioral" as const, difficulty: "easy" as const, answer: "Research the company, align your values with theirs..." },
-        { id: "20", question: "Describe a challenging project", category: "behavioral" as const, difficulty: "medium" as const, answer: "Use the STAR method: Situation, Task, Action, Result..." },
+        { id: "18", question: "Tell me about yourself", category: "behavioral", difficulty: "easy", answer: "Start with your current role, highlight key achievements..." },
+        { id: "19", question: "Why do you want to work here?", category: "behavioral", difficulty: "easy", answer: "Research the company, align your values with theirs..." },
+        { id: "20", question: "Describe a challenging project", category: "behavioral", difficulty: "medium", answer: "Use the STAR method: Situation, Task, Action, Result..." },
       ],
     };
 
@@ -71,7 +70,7 @@ const Resources = () => {
     dispatch(setBlogs(mockBlogs));
   }, [selectedCategory, dispatch]);
 
-  const toggleQuestion = (id: string) => {
+  const toggleQuestion = (id) => {
     const newExpanded = new Set(expandedQuestions);
     if (newExpanded.has(id)) {
       newExpanded.delete(id);
@@ -81,23 +80,23 @@ const Resources = () => {
     setExpandedQuestions(newExpanded);
   };
 
-  const getDifficultyColor = (difficulty: string) => {
+  const getDifficultyColor = (difficulty) => {
     const colors = {
       easy: "bg-success text-success-foreground",
       medium: "bg-warning text-warning-foreground",
       hard: "bg-destructive text-destructive-foreground",
     };
-    return colors[difficulty as keyof typeof colors] || "bg-secondary";
+    return colors[difficulty] || "bg-secondary";
   };
 
-  const getCategoryIcon = (category: string) => {
+  const getCategoryIcon = (category) => {
     const icons = {
       frontend: FaCode,
       backend: FaCode,
       fullstack: FaLaptopCode,
       behavioral: FaBrain,
     };
-    return icons[category as keyof typeof icons] || FaBookOpen;
+    return icons[category] || FaBookOpen;
   };
 
   const paginatedQuestions = questions.slice(
@@ -133,7 +132,7 @@ const Resources = () => {
                     <CardTitle>Interview Questions</CardTitle>
                     <Select
                       value={selectedCategory}
-                      onValueChange={(value: any) => dispatch(setCategory(value))}
+                      onValueChange={(value) => dispatch(setCategory(value))}
                     >
                       <SelectTrigger className="w-full md:w-48">
                         <SelectValue placeholder="Select category" />

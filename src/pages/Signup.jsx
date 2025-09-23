@@ -63,7 +63,7 @@ const Signup = () => {
     return Object.values(newErrors).every(error => !error);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!validateForm()) return;

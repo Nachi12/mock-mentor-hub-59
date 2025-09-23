@@ -11,13 +11,12 @@ import Layout from "@/components/layout/Layout";
 import { FaCalendarAlt, FaClock, FaUserTie, FaCode, FaBrain, FaLaptopCode, FaRocket } from "react-icons/fa";
 import { motion } from "framer-motion";
 import InterviewCarousel from "@/components/interviews/InterviewCarousel";
-import { RootState } from "@/store/store";
 import { getResourcesForInterviewType } from "@/utils/resourceMapping";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { toast } = useToast();
-  const interviews = useSelector((state: RootState) => state.interviews.interviews);
+  const interviews = useSelector((state) => state.interviews.interviews);
   const [formData, setFormData] = useState({
     type: "",
     date: "",
@@ -41,7 +40,7 @@ const Dashboard = () => {
     "Jessica Williams - Engineering Manager",
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (!formData.type || !formData.date || !formData.time || !formData.interviewer) {
@@ -56,11 +55,11 @@ const Dashboard = () => {
     const resources = getResourcesForInterviewType(formData.type);
     const newInterview = {
       id: Date.now().toString(),
-      type: formData.type as any,
+      type: formData.type,
       date: formData.date,
       time: formData.time,
       interviewer: formData.interviewer,
-      status: "upcoming" as const,
+      status: "upcoming",
       resources: resources.map(r => r.url),
     };
 

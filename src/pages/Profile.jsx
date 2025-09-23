@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store/store";
 import { updateProfile } from "@/store/slices/authSlice";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +13,7 @@ import { motion } from "framer-motion";
 const Profile = () => {
   const dispatch = useDispatch();
   const { toast } = useToast();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: user?.name || "",
@@ -23,7 +22,7 @@ const Profile = () => {
     dob: user?.dob || "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     dispatch(updateProfile({
