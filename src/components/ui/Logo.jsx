@@ -2,13 +2,7 @@ import { Link } from "react-router-dom";
 import { FaUserTie } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-interface LogoProps {
-  className?: string;
-  size?: "sm" | "md" | "lg";
-  showText?: boolean;
-}
-
-const Logo = ({ className = "", size = "md", showText = true }: LogoProps) => {
+const Logo = ({ className = "", size = "md", showText = true }) => {
   const sizeClasses = {
     sm: "h-8 w-8",
     md: "h-10 w-10",
